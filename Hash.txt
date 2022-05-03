@@ -1,0 +1,216 @@
+HASHING 
+In hashing there is a hash function that keys to some values.
+But these hashing function may lead to collision that is two 
+or more keys are mapped to same vaue. 
+
+Chaing hashing avoids collision. 
+
+The idea is to make each cell of hash table point to a linked 
+list of records  that have same hash function value.
+
+
+ To insert a node into the hash table, we need to find the 
+hash index for the given key.And it could be calculating 
+using the hash function. 
+
+_______________________________________________________________
+ 
+  Problem : 
+ 
+  Suppose we are storing employee records , the primary key  
+  for which is emplopyee's telephone number 
+  
+  Operations 
+  1) Insert Employee Record
+  2) Search for an Employee 
+  3) Delete Employee Record 
+
+  Solutions :
+  1) Use an Array 
+     Search takes linear time 
+     If stored in sorted order, search can be done in O(logn)
+     using binary search but then insertion and deletion
+     become costly.
+ 
+  2) Use a Linked list
+     Search takes linear time
+  
+  3) Use balanced Binary Search Tress to store records 
+     Insert takes O(logn)
+     Search takes O(logn)
+     Deletion takes O(logn)
+  
+  4) Create a Direct Access table 
+     Insert takes O(1)
+     Search takes O(1)
+     Deletion takes O(1)
+      
+     Limitations
+     1) Size of table (m*10^n)
+                       m is the size of pointer 
+                       n are the digits in the telephone number
+     2) Integer may not hold the size of digits
+      
+    HASHING - provides O(1) time on averange for insert, 
+              search and delete 
+    HASH function - hash function maps a big number or string 
+                    to small integer that can be used as index 
+                    in hash table.
+
+
+     Collision Handling 
+     1) Chaining - The idea is to make each cell of hash table 
+                   point to a linked list of records that have 
+                   same hash function value.
+     2) Open Addressing - All elements are stored in the hash 
+                          table itself.
+                    -> Linear Probing 
+                    -> Quadratic Probing 
+                    -> Double Hashing  
+  ____________________________________________________________________
+   
+    Collision - Two keys resulting in same value.The idea is to
+                make each cell of hash table point to a  linked 
+                list of records that have same hash function 
+                value .
+     Advantages : 
+               1) Simple to implement.
+               2) Hash table never fills up, we can always add 
+                  more elements to chain.
+               3) Less sensetive to the hash function or load 
+                  factors.
+               4) It is mostly used when it is unknown how many 
+                  and how frequently keys may be inserted and 
+                  deleted.
+
+     Disadvantages :
+               1) Cache performing of chaining is not good as
+                  keys are stored using linked list.
+               2) Wastage of Space.
+               3) If the chain becomes long,then the search time 
+                  can become O(n) in worst case.
+               4) Uses extra space for links.
+
+      Compplexity : 
+                n = number of keys stored in table
+                m = number of slots in table 
+                alpha = Average keys per slot or load factor = n/m 
+                 
+             Expected time to insert/search/delete :
+                O(1+alpha) 
+
+    OPEN ADDRESSING 
+  -- Method of resolving collision in hashing 
+  -- All items (keys) are stored in table itself 
+  -- Size of table >= No of keys 
+  -- Hash function specifes order of slots to probe(try) for
+      a key (for insert/search/delete), not just one slot
+
+    A hash collision is resolved by probing 
+    1) Linear Probing 
+    2) Quadratic Probing 
+    3) Double Hashing 
+    Operations 
+    1) Insert (key)
+    2) Search (key)
+    3) Delete (key)
+
+   Linear Probing  hi(X) = (Hash(X) +i )% HashTableSize 
+                   This will give the the slot to probe.
+      
+      If h0 = (Hash(X) +0) % HashTableSize is full we try for h1
+      If h1 = (Hash(X) +1) % HashTableSize is full we rty for h2
+     and so on ... 
+
+   Quadratic Probing : hi(Hash(X) + i^2) % HashTableSize 
+      
+      if h0 = (Hash(X) +0)% HashTableSize is full we try for h1
+      if h1 = (Hash(X) +1)% HashTableSize is full we rty for h2  
+      if h2 = (Hash(X) +4)% HashTableSize is full we try for h3
+      and so on ...
+
+    Double Hashing 
+      Double hashing : use another hash function hash2(X) and 
+                       look for i*hash2(X) slot in i'th iteration.
+        
+             hi(X) = (Hash(X) +i*Hash2(X))% HashTableSize 
+
+       if h0 = (Hash(X) + 0*Hash2(X))% HashTableSize is full we try for h1
+       if h1 = (Hash(X) + 1*Hash2(X))% HashTableSize is full we try for h2
+       if h3 = (Hash(X) + 2*Hash2(X))% HashTableSize is full we try for h3
+       and so on ...
+
+  COMPARISON 
+  Linear Probing 
+     * Easy to implement 
+     * Best Cache performance 
+     * Suffers from clustering 
+  Quadratic Probing 
+     * Average Cache Performance 
+     * Suffers a lesser clustering than linear probing 
+  Double Hashing 
+     * Poor Cache Performance 
+     * No clustering 
+     * Requires more computation time 
+
+   Complexity 
+ 
+  m = Number of slots in hash table 
+  n = Number of keys to be inserted in hash table 
+ 
+  Load factor = alpha = n / m (<1)
+  Excepted time to search/insert/delete < 1/(1-alpha)
+  So search, insert and delete take O(1/(1-alpha)) time 
+  
+______________________________________________________________________________
+
+  
+   KEY CONCEPTS
+collision :
+             The result when two or more items in a hash table hash out to the
+             worsame position. This problem is unavoidable because there are 
+             more items than positions. 
+double hashing :
+             A hashing technique that does not suffer from secondary clustering.
+             A second hash function is used to drive the collision resolution.
+hash function :
+             A function that converts the item into an integer suitable to index 
+             an array where the item is stored. If the hash function were one to
+             one, we could access the item by its array index. Since the hash   
+             function is not one to one, several items will collide at the same 
+             index. 
+hash table : 
+             A table used to implement a dictionary in constant time per operation. 
+hashing : 
+             The implementation of hash tables to perform insertions, deletions,
+             and finds.
+linear probing :
+             A way to avoid collisions by sequentially scanning an array until an
+             empty cell is found. 
+load factor : 
+             The number of elements in a hash table divided by the size of the
+             hash table array, or the fraction of the table that is full. 
+             In a probing hash table, the load factor ranges from 0 (empty) to 1 (full).
+             In separate chaining hashing, it can be greater than 1. 
+lazy deletion : 
+             The technique of marking elements as deleted instead of physically
+             removing them from a hash table. It is required in probing hash tables.
+primary clustering :
+             Large clusters of occupied cells form during linear probing,
+making insertions in the cluster expensive (and then the insertion makes
+the cluster even larger) and affecting performance. (781)
+quadratic probing A collision resolution method that examines cells 1, 4, 9,
+and so on, away from the original probe point. (784)
+secondary clustering Clustering that occurs when elements that hash to the
+same position probe the same alternative cells. It is a minor theoretical
+blemish. (797)
+separate chaining A space-efficient alternative to quadratic probing in which
+an array of linked lists is maintained. It is less sensitive to high load factors and exhibits some of the trade-offs considered in the array versus
+linked list stack implementations. (797)
+802 chapter 20 hash table   
+    
+ 
+                  
+   
+     
+  
