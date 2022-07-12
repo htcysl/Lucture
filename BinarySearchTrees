@@ -1,0 +1,11 @@
+// the code below gives us a tree which is binary search tree or not 
+ boolean isBST(Node root){
+        return isBinary(root,Integer.MIN_VALUE,Integer.MAX_VALUE) ;
+ }
+ boolean isBinary(Node root, int minVal ,int maxVal) {
+        
+        if(root == null) return true ;
+        if(root.data<minVal || root.data>maxVal ) return false ;
+        
+        return isBinary(root.left,minVal,root.data-1)&&isBinary(root.right,root.data+1,maxVal) ;       
+ }
