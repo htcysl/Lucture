@@ -197,17 +197,20 @@ lazy deletion :
              removing them from a hash table. It is required in probing hash tables.
 primary clustering :
              Large clusters of occupied cells form during linear probing,
-making insertions in the cluster expensive (and then the insertion makes
-the cluster even larger) and affecting performance. (781)
-quadratic probing A collision resolution method that examines cells 1, 4, 9,
-and so on, away from the original probe point. (784)
-secondary clustering Clustering that occurs when elements that hash to the
-same position probe the same alternative cells. It is a minor theoretical
-blemish. (797)
-separate chaining A space-efficient alternative to quadratic probing in which
-an array of linked lists is maintained. It is less sensitive to high load factors and exhibits some of the trade-offs considered in the array versus
-linked list stack implementations. (797)
-802 chapter 20 hash table   
+             making insertions in the cluster expensive (and then the insertion makes
+             the cluster even larger) and affecting performance.
+quadratic probing :
+              A collision resolution method that examines cells 1, 4, 9,
+              and so on, away from the original probe point. 
+secondary clustering : 
+              Clustering that occurs when elements that hash to the same position 
+              probe the same alternative cells. It is a minor theoretical blemish.
+separate chaining : 
+              A space-efficient alternative to quadratic probing in which an array of 
+              linked lists is maintained. It is less sensitive to high load factors 
+              and exhibits some of the trade-offs considered in the array versus linked 
+              list stack implementations. 
+
     
  
                   
